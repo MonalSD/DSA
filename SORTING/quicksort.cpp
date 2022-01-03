@@ -18,34 +18,33 @@ void printarr(int a[],int n)
     cout<<endl;
 }
 
-int partition(int a[],int r,int p)
+int partition(int a[],int start,int end)
 {
-    int pivot =a[p];
-    int i=r-1;
+    int pivot =a[end];
+    int pindex=start;
 
-    for(int j=r;j<p;j++)
+    for(int i=start;i<end;i++)
     {
-        if(a[j]<=pivot)
+        if(a[i]<=pivot)
         {
-            i++;
-            swap(&a[i],&a[j]);
+            swap(&a[i],&a[pindex]);
+            pindex++;
         }
 
     }
 
-    swap(&a[i+1],&a[p]);
+    swap(&a[pindex],&a[end]);
 
-    return (i+1);
+    return (pindex);
 }
 
-void quicksort(int a[],int r,int p)
+void quicksort(int a[],int start,int end)
 {
-    if(r<p)
+    if(start<end)
     {
-        int pi=partition(a,r,p);
-        quicksort(a,r,pi-1);
-
-        quicksort(a,pi+1,p);
+        int pindex = partition(a,start,end);
+        quicksort(a,start,pindex-1);
+        quicksort(a,pindex+1,end);
     }
 }
 
