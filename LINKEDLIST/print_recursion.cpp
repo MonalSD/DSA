@@ -7,18 +7,16 @@ struct node{
     node* next;
 };
 
-struct node* head;
-
-void insert(struct node* head,int x)
+struct node* insert(struct node* head,int x)
 {
     node* temp = new node();
-    node* monal=head;
     temp->next=NULL;
     temp->data=x;
-    if(head==NULL||head->next==NULL)
+    if(head==NULL)
     head=temp;
     else
     {
+        node* monal=head;
         while(monal->next!=NULL)
         {
             monal=monal->next;
@@ -31,17 +29,30 @@ void insert(struct node* head,int x)
 void print(struct node* p)
 {
     if(p==NULL)
-    return;
-    cout<<p->data;
+    {
+     return;
+    }
+    cout<<p->data<<" ";
     print(p->next);
 }
 
+void print2(struct node* p)
+{
+    if(p==NULL)
+    return;
+    print2(p->next);
+    cout<<p->data<<" ";
+}
 int main()
 {
-    struct node* head=NULL;
-    head=insert(2);
-    head=insert(4);
-    head=insert(6);
-    head=insert(5);
+    struct node* head = NULL;
+    head=insert(head,2);
+    head=insert(head,4);
+    head=insert(head,6);
+    head=insert(head,5);
+    cout<<"Forward Order: ";
     print(head);
+    cout<<"\n"<<"reverse order: ";
+    print2(head);
+    return 0;
 }
